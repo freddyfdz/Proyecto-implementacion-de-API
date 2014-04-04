@@ -15,10 +15,18 @@
   </fieldset>
 </form>
 <div ng-controller="appController">
+<<<<<<< HEAD
+ <button type="submit" ng-disabled="!loginuserform.$valid" ng-click="login(username)" class="button expand round">Login</button>
+            <h1 class="subheader">Bienvenido. </h1>
+            <h1 class="subheader">Estos son sus datos principales. </h1>
+            <ul class="panel callout radius">
+			<aside>
+=======
  <button type="submit" ng-click="login()" class="button expand round">Login</button>
             <h1 class="subheader">Bienvenido. </h1>
             <h1 class="subheader">Estos son sus datos principales. </h1>
             <ul class="panel callout radius">
+>>>>>>> 5f325cf81eaa90ea3a26b6d18393b39fca8e244b
 				<p><p>Nombre: {{datos.descripcion.nombre}} 
 				<p>Username: {{datos.username}} 
 				<p>ID: {{datos.user_id}} 
@@ -27,4 +35,8 @@
 				<p>Cookie: {{datos.cookie}} 
 				<p>Cedula:{{datos.descripcion.cedula}}
 				<p>correo:{{datos.descripcion.correo}}</p></p>
+<<<<<<< HEAD
+			</aside>
+=======
+>>>>>>> 5f325cf81eaa90ea3a26b6d18393b39fca8e244b
             </ul>
