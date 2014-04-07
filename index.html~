@@ -14,7 +14,6 @@
 	</marquee>
 	<p><p>
 	<p><p>
-	<h1></h1>
   	<div id="contenedor_general"/> 
   	<div ng-view></div> 
   </body>
