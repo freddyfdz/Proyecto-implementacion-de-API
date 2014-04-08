@@ -16,7 +16,7 @@ login.config(function($routeProvider)
 	
 	.when('/estado', {
 	templateUrl: 'estado.html',
-	controller: 'ctrestado'
+	controller: 'estadoController'
 	})
 	
 	.when('/mensajes', {

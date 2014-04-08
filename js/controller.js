@@ -49,14 +49,15 @@ login.controller("mensajesController", function ($scope, $http)
 		Id = localStorage.getItem('Id');
 	$scope.Mensage =
 	{
-		"autor": 1001, 
+		"autor": 201, 
 		"titulo": "Mensaje", 
 		"cuerpo": "Mensaje", 
 		"tipo": "informacion"
 	}	
+	
+		
 
-   $scope.enviar = function ($scope) {
-   	   console.log("enviando...")
+    $scope.enviar = function () {
         $http({
             url: "http://api-a.vime.com.co/mensaje/?user_id="+Id+"&cookie="+cookie,
             method: "POST",

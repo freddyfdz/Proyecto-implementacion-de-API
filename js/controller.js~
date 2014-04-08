@@ -42,3 +42,31 @@ login.controller("ctrdatos", function ($scope, $http)
 	$scope.Cedula = localStorage.getItem('Cedula');
 	$scope.correo = localStorage.getItem('correo');
 });
+
+login.controller("mensajesController", function ($scope, $http) 
+{
+		cookie = localStorage.getItem('cookie');
+		Id = localStorage.getItem('Id');
+	$scope.Mensage =
+	{
+		"autor": 201, 
+		"titulo": "Mensaje", 
+		"cuerpo": "Mensaje", 
+		"tipo": "informacion"
+	}	
+	
+		
+
+    $scope.enviar = function () {
+        $http({
+            url: "http://api-a.vime.com.co/mensaje/?user_id="+Id+"&cookie="+cookie,
+            method: "POST",
+            data: $scope.Mensage 
+        }).success(function (data, status, headers, config) {
+            $scope.MessageStatus = status;
+        }).error(function() {
+            $scope.MessageStatus = 'Message Not Sended';
+    });
+    }
+});
+

@@ -21,7 +21,7 @@ login.config(function($routeProvider)
 	
 	.when('/mensajes', {
 	templateUrl: 'mensajes.html',
-	controller: 'ctrmensajes'
+	controller: "mensajesController"
 	})
 	
 	.otherwise({
