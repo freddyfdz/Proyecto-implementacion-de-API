@@ -12,9 +12,16 @@
 			Para:<br />
 			<input type="text" required placeholder="Destinatario" name="email" size="20" ng-model="destinatario"><br />
 			Mensaje:<br />
+<<<<<<< HEAD
 			<textarea name="texto" rows="4" cols="40" ng-model="Mensaje"></textarea><br />
 			<div ng-controller="mensajesController">
 			<input type="submit" ng-click="enviar()" value="Enviar">
 			{{MessageStatus}}
+=======
+			<!--<input type="text" style="WIDTH: 228px; HEIGHT: 98px" 				ng-model="Message.Text" required placeholder="Cuerpo del mensaje" name="mensaje" 	MAXLENGTH="max_longitud"><br /> <-->
+			<textarea name="texto" rows="4" cols="40" ng-model="Mensaje"></textarea><br />
+			<div ng-controller="mensajesController">
+			<input type="submit" ng-click="enviar" value="Enviar">
+>>>>>>> e9e0778c472628d3a466fe572efcf76c5b079df4
 		</fieldset>
 	</from>

@@ -3,7 +3,7 @@ login.controller("loginController", function ($scope, $http, $location)
 {
 	$scope.cargar = function ()
 	{
-		$http.post("http://api-a.vime.com.co/login/?username="+$scope.username+"&password="+$scope.password).success(function (data,status) 
+		$http.post("http://api-a.vime.com.co/login/?username="+$scope.username+"&password="				+$scope.password).success(function (data,status) 
 		{
 			$scope.datos = data;
 			$scope.status = status;
@@ -45,28 +45,28 @@ login.controller("ctrdatos", function ($scope, $http)
 
 login.controller("mensajesController", function ($scope, $http) 
 {
-		cookie = localStorage.getItem('cookie');
-		Id = localStorage.getItem('Id');
-	$scope.Mensage =
+	$scope.mansajes =
+	
 	{
-		"autor": 201, 
+		"autor": 1001, 
 		"titulo": "Mensaje", 
 		"cuerpo": "Mensaje", 
 		"tipo": "informacion"
 	}	
 	
-		
+		cookie = localStorage.getItem('cookie');
+		Id = localStorage.getItem('Id');
 
     $scope.enviar = function () {
         $http({
-            url: "http://api-a.vime.com.co/mensaje/?user_id="+Id+"&cookie="+cookie,
+            url: "http://api-a.vime.com.co/login/update/?user_id="+Id+"&cookie="+cookie",
             method: "POST",
-            data: $scope.Mensage 
+            data: { $scope.Mensage }
         }).success(function (data, status, headers, config) {
-            $scope.MessageStatus = data;
+            $rootScope.MessageSendResult = data;
+            $location.path('/mensajes');          
         }).error(function() {
             $scope.MessageStatus = 'Message Not Sended';
+        });
     });
-    }
 });
-
