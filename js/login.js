@@ -1,44 +1,30 @@
-//utilizo la herramienta $htpp para poder realizar nuestra conexion con la api y traer asi los datos con el Json haciendo uso para ello del metodo POST 
-login.controller("loginController", function ($scope, $http, $location) 
+//se declara el ngRoute para poder darle vida al ng-view declarado en el index
+var login = angular.module("login", ['ngRoute']); 
+  //definimos las rutas 
+login.config(function($routeProvider)
 {
-	$scope.cargar = function ()
-	{
-		$http.post("http://api-a.vime.com.co/login/?username="+$scope.username+"&password="+$scope.password).success(function (data,status) 
-		{
-			$scope.datos = data;
-			$scope.status = status;
-			localStorage.setItem('cookie', $scope.datos.cookie);
-			localStorage.setItem('Id', $scope.datos.user_id);
-			localStorage.setItem('Nombre', $scope.datos.descripcion.nombre);
-			localStorage.setItem('Username', $scope.datos.username);
-			localStorage.setItem('Cedula', $scope.datos.descripcion.cedula);
-			localStorage.setItem('correo', $scope.datos.descripcion.correo); 
-			$location.path('/datos');
-		})
+	$routeProvider
+	.when('/login', {
+	controller: "loginController",
+	templateUrl: 'login.html'
+	})
+
+	.when('/datos', {
+	templateUrl: 'datos.html',
+	controller: 'ctrdatos'
+	})
 	
-			.error(function (data,status)
-			{
-				alert("usuario y/o contraseña incorrectos")
-				$scope.status = status;
-			})
-	}
-});
-
-login.controller("estadoController", function ($scope, $http) 
-{
-	cookie = localStorage.getItem('cookie');
-	Id = localStorage.getItem('Id');
-
-$http.get("http://api-a.vime.com.co/login/update/?user_id="+Id+"&cookie="+cookie).success(function (data, status) 
-	{
-	$scope.datos = data;
+	.when('/estado', {
+	templateUrl: 'estado.html',
+	controller: 'estadoController'
+	})
+	
+	.when('/mensajes', {
+	templateUrl: 'mensajes.html',
+	controller: 'mensajesController'
+	})
+	
+	.otherwise({
+	redirectTo: '/login'
 	});
-});
-
-login.controller("ctrdatos", function ($scope, $http)
-{
-	$scope.nombre = localStorage.getItem('Nombre');
-	$scope.Username = localStorage.getItem('Username');
-	$scope.Cedula = localStorage.getItem('Cedula');
-	$scope.correo = localStorage.getItem('correo');
-});
+})

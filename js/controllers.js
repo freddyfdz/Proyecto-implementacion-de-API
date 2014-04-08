@@ -1,0 +1,72 @@
+//utilizo la herramienta $htpp para poder realizar nuestra conexion con la api y traer asi los datos con el Json haciendo uso para ello del metodo POST 
+login.controller("loginController", function ($scope, $http, $location) 
+{
+	$scope.cargar = function ()
+	{
+		$http.post("http://api-a.vime.com.co/login/?username="+$scope.username+"&password="				+$scope.password).success(function (data,status) 
+		{
+			$scope.datos = data;
+			$scope.status = status;
+			localStorage.setItem('cookie', $scope.datos.cookie);
+			localStorage.setItem('Id', $scope.datos.user_id);
+			localStorage.setItem('Nombre', $scope.datos.descripcion.nombre);
+			localStorage.setItem('Username', $scope.datos.username);
+			localStorage.setItem('Cedula', $scope.datos.descripcion.cedula);
+			localStorage.setItem('correo', $scope.datos.descripcion.correo); 
+			$location.path('/datos');
+		})
+	
+			.error(function (data,status)
+			{
+				alert("usuario y/o contraseña incorrectos")
+				$scope.status = status;
+			})
+	}
+});
+
+login.controller("estadoController", function ($scope, $http) 
+{
+	cookie = localStorage.getItem('cookie');
+	Id = localStorage.getItem('Id');
+
+$http.get("http://api-a.vime.com.co/login/update/?user_id="+Id+"&cookie="+cookie).success(function (data, status) 
+	{
+	$scope.datos = data;
+	});
+});
+
+login.controller("ctrdatos", function ($scope, $http)
+{
+	$scope.nombre = localStorage.getItem('Nombre');
+	$scope.Username = localStorage.getItem('Username');
+	$scope.Cedula = localStorage.getItem('Cedula');
+	$scope.correo = localStorage.getItem('correo');
+});
+
+login.controller("mensajesController", function ($scope, $http) 
+{
+	$scope.mansajes =
+	
+	{
+		"autor": 1001, 
+		"titulo": "Mensaje", 
+		"cuerpo": "Mensaje", 
+		"tipo": "informacion"
+	}	
+	
+		cookie = localStorage.getItem('cookie');
+		Id = localStorage.getItem('Id');
+
+    $scope.enviar = function () {
+        $http({
+            url: "http://api-a.vime.com.co/login/update/?user_id="+Id+"&cookie="+cookie",
+            method: "POST",
+            data: { $scope.Mensage }
+        }).success(function (data, status, headers, config) {
+            $rootScope.MessageSendResult = data;
+            $location.path('/mensajes');          
+        }).error(function() {
+            $scope.MessageStatus = 'Message Not Sended';
+        });
+    });
+});
